@@ -143,4 +143,4 @@ LOGIN_URL = 'account:signin'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_URL = 'account:logout'
 
-
+AUTH_USER_MODEL = 'accounts.User'

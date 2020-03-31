@@ -9,6 +9,8 @@ urlpatterns = [
     path('signup/', views.register, name='signup'),
     path('edit/', views.edit, name='edit'),
     path('edit/password/', views.edit_password, name='edit_password'),
+    path('reset-password/', views.password_reset, name='password_reset'),
+    path('confirm-password/<key>/', views.password_reset_confirm, name='password_reset_confirm'),
     path('signin/', auth_view.LoginView.as_view(template_name='accounts/signin.html'), name='signin'),
     path('logout/', auth_view.LogoutView.as_view(next_page='core:home'), name='logout'),
 ]
