@@ -65,15 +65,7 @@ def undo_enrollment(request, slug):
 @login_required
 @enrollment_required
 def announcements(request, slug):
-  course = get_object_or_404(Course, slug=slug)
-  print('lero', course)
-  if not request.user.is_staff:
-    enrollment = get_object_or_404(
-        Enrollment, user=request.user, course=course
-    )
-    if not enrollment.is_approved():
-      messages.error(request, 'Enrollment pending')
-      return redirect('account:dashboard')
+  course = request.course
   template = 'courses/announcements.html'
   context = {
     'course': course,
@@ -84,14 +76,7 @@ def announcements(request, slug):
 @login_required
 @enrollment_required
 def show_announcement(request, slug, pk):
-  course = get_object_or_404(Course, slug=slug)
-  if not request.user.is_staff:
-    enrollment = get_object_or_404(
-      Enrollment, user=request.user, course=course
-    )
-    if not enrollment.is_approved():
-      messages.error(request, 'Your enrollment is pending')
-      return redirect('accounts:dashboard')
+  course = request.course
   announcement = get_object_or_404(course.announcements.all(), pk=pk)
   form = CommentForm(request.POST or None)
   if form.is_valid():
@@ -129,7 +114,7 @@ def lesson(request, slug, pk):
   course = request.course
   lesson = get_object_or_404(Lesson, pk=pk, course=course)
   if not request.user.is_staff and not lesson.is_available():
-    messages.error(request, 'Esta aula não está disponível')
+    messages.error(request, 'This lesson is not available')
     return redirect('courses:lessons', slug=course.slug)
   template = 'courses/lesson.html'
   context = {
@@ -145,7 +130,7 @@ def material(request, slug, pk):
   material = get_object_or_404(Material, pk=pk, lesson__course=course)
   lesson = material.lesson
   if not request.user.is_staff and not lesson.is_available():
-    messages.error(request, 'Este material não está disponível')
+    messages.error(request, 'This material is not available')
     return redirect('courses:lesson', slug=course.slug, pk=lesson.pk)
   if not material.is_embedded():
     return redirect(material.file.url)
