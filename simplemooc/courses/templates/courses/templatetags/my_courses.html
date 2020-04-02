@@ -1,0 +1,6 @@
+<li class="pure-menu-heading">My Courses</li>
+{% for enrollment in enrollments %}
+<li><a href="#">{{ enrollment.course }}</a></li>
+{% empty %}
+<li>Doing nothing, uh ?</li>
+{% endfor %}
