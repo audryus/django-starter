@@ -36,11 +36,12 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'livesync',
     'django.contrib.staticfiles',
+    'taggit',
     'simplemooc.core',
     'simplemooc.courses',
     'simplemooc.accounts',
+    'simplemooc.forum',
 ]
 
 MIDDLEWARE = [
@@ -51,7 +52,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'livesync.core.middleware.DjangoLiveSyncMiddleware',
 ]
 
 ROOT_URLCONF = 'simplemooc.urls'

@@ -21,6 +21,7 @@ from django.conf.urls.static import static
 from simplemooc.core import urls
 from simplemooc.courses import urls as courses_urls
 from simplemooc.accounts import urls as accounts_urls
+from simplemooc.forum import urls as forums_urls
 
 admin.autodiscover()
 
@@ -28,6 +29,7 @@ urlpatterns = [
     path('', include((urls, 'core'), namespace='core')),
     path('courses/', include((courses_urls, 'courses'), namespace='courses')),
     path('account/', include((accounts_urls, 'account'), namespace='account')),
+    path('forum/', include((forums_urls, 'forum'), namespace='forum')),
     path('admin/', admin.site.urls),
 ]
 if settings.DEBUG:
