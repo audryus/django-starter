@@ -14,12 +14,12 @@ def enrollment_required(view_func):
                     user=request.user, course=course
                 )
             except Enrollment.DoesNotExist:
-                message = 'Desculpe, mas você não tem permissão para acessar esta página'
+                message = 'Sorry, you can`t access this.'
             else:
                 if enrollment.is_approved():
                     has_permission = True
                 else:
-                    message = 'A sua inscrição no curso ainda está pendente'
+                    message = 'Your enrollment is pending'
         if not has_permission:
             messages.error(request, message)
             return redirect('accounts:dashboard')
